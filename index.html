@@ -26,6 +26,9 @@ section[hidden]{display:none}
 ul{margin:4px 0 0;padding-left:20px}li{margin:2px 0}
 .note{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:2px 16px 12px;margin-bottom:12px}
 .q{font-style:italic;color:var(--muted)}
+.say{font-style:italic;color:var(--muted);margin:6px 0 4px}
+.time{font:600 .85rem Nunito,sans-serif;color:var(--muted);margin-left:8px}
+.key{background:var(--card);border:2px dashed var(--margin);border-radius:10px;padding:8px 16px 12px;margin-top:18px}
 /* cards */
 .stat{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;margin-bottom:8px}
 .fc{perspective:1000px;height:260px;margin-bottom:14px}
@@ -57,11 +60,14 @@ ul{margin:4px 0 0;padding-left:20px}li{margin:2px 0}
 <h1>Reneszánsz, humanizmus, reformáció</h1>
 <nav role="tablist">
 <button role="tab" id="t-notes" aria-selected="true">Jegyzet</button>
+<button role="tab" id="t-speak" aria-selected="false">Felelet</button>
 <button role="tab" id="t-cards" aria-selected="false">Kártyák</button>
 <button role="tab" id="t-quiz" aria-selected="false">Kvíz</button>
 </nav>
 
 <section id="notes"></section>
+
+<section id="speak" hidden></section>
 
 <section id="cards" hidden>
 <div id="deck"></div>
@@ -144,12 +150,24 @@ function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(M
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\n/g,"<br>")}
 
 /* tabs */
-var tabs=["notes","cards","quiz"];
+var tabs=["notes","speak","cards","quiz"];
 function show(n){tabs.forEach(function(t){$(t).hidden=t!==n;$("t-"+t).setAttribute("aria-selected",t===n)});try{location.hash=n}catch(e){}}
 tabs.forEach(function(t){$("t-"+t).onclick=function(){show(t)}});
 
 /* notes */
 $("notes").innerHTML=NOTES.map(function(s){return '<h2>'+esc(s[0])+'</h2><div class="note"><ul>'+s[1].map(function(l){return '<li>'+esc(l)+'</li>'}).join("")+'</ul></div>'}).join("");
+
+/* felelet */
+var SPEAK=[
+["1. Bevezetés","kb. 30 mp","„A 14–16. században Európa szellemi élete megújult: ekkor jelent meg a reneszánsz, a humanizmus és a reformáció.”",["Mondd ki a három fogalmat, és hogy ezekről fogsz beszélni","Jelezd, hogy a három irányzat összefügg: mindegyik az ember és a műveltség új értékelésére épül"]],
+["2. Reneszánsz – korszak és korstílus","kb. 1 perc","„A reneszánsz jelentése újjászületés.”",["14–16. század, francia renaissance","Észak-Itália városaiból indult, majd elterjedt Európában","Az antik görög–római eszmék újjászületése","Világszemlélet: emberközpontúság, a földi élet és az egyéniség fontossága","„Minden dolgok mértéke az ember”","Ideál: a sokoldalúan művelt személyiség (polihisztor)"]],
+["3. Reneszánsz művészet és irodalom","kb. 1 perc","„A művészetben a harmónia, az arányosság és a szépség a fő érték.”",["Példák: Botticelli: Vénusz születése, Michelangelo: Ádám teremtése","Irodalom: emberi érzések és kapcsolatok ábrázolása","Témák: szerelem, barátság, természet, emberi test","Új műfajok: egyéni hangú líra, tájköltészet, a valóság ábrázolása"]],
+["4. Humanizmus – új gondolkodásmód","kb. 1 perc","„A humanizmus szó a latin humanitasból ered, jelentése emberiesség.”",["Világi gondolkodásmód: az evilági élet fontosságát hirdeti","Tudós magatartás: klasszikus műveltség","Az emberközpontú szemlélet elméleti alapja: a polihisztor-eszmény"]],
+["5. Reformáció – hitújító mozgalom","kb. 1,5 perc","„A reformáció a 16. században indult, neve latinul megújítást, újjászervezést jelent.”",["Kettős jelleg: szellemi irányzat és vallási mozgalom","1517 – Luther Márton fellépése; fontos alak még Kálvin János","Követelések: protestáns felekezetek, anyanyelvi Biblia és istentisztelet, iskolák és nyomdák alapítása","Első teljes magyar Biblia: Károli Gáspár (Vizsoly, 1590)","Katolikus fordítás: Káldi György (1626)"]],
+["6. Magyar vonatkozások","kb. 45 mp","„Magyarországon a reneszánsz Mátyás király udvarában jelent meg.”",["Mátyás király","Janus Pannonius – humanista költő","Balassi Bálint","Utalj vissza Károli Gáspárra a reformációnál"]],
+["7. Befejezés","kb. 30 mp","„Összefoglalva…”",["Reneszánsz: művészeti és szellemi újjászületés","Humanizmus: emberközpontú világnézet, klasszikus műveltség","Reformáció: vallási és szellemi megújulás, hitújítás","Zárd egy mondattal: mindhárom az embert és a műveltséget állította a középpontba"]]
+];
+$("speak").innerHTML='<p>Kb. 5–6 perces felelet. A dőlt sor a nyitómondat, a felsorolás a kifejtés.</p>'+SPEAK.map(function(s){return '<h2>'+esc(s[0])+'<span class="time">'+esc(s[1])+'</span></h2><div class="note"><p class="say">'+esc(s[2])+'</p><ul>'+s[3].map(function(l){return '<li>'+esc(l)+'</li>'}).join("")+'</ul></div>'}).join("")+'<div class="key"><h2 style="margin-top:6px">Ezt ne felejtsd el</h2><ul><li>14–16. század: reneszánsz</li><li>1517: Luther fellépése</li><li>1590: Károli-Biblia (Vizsoly)</li><li>1626: Káldi-Biblia</li><li>Botticelli, Michelangelo, Janus Pannonius, Balassi</li></ul></div>';
 
 /* flashcards */
 var queue,idx,known,flipped;
