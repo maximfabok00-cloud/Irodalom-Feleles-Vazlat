@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reneszánsz, humanizmus, reformáció – tanulófüzet</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@400;600;700&display=swap">
+<style>
+:root{--paper:#f5f8fd;--line:#c9d6ec;--ink:#1d3a8f;--text:#1e2a47;--muted:#5b6a8c;--margin:#d9534f;--card:#ffffff;--ok:#1f8a4c;--bad:#c0392b;--okbg:#e3f5ea;--badbg:#fbe5e2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#141a2b;--line:#27324f;--ink:#8fb0ff;--text:#e3e9f8;--muted:#9aa8c7;--margin:#ff7b72;--card:#1c2440;--ok:#5fd68f;--bad:#ff8a7d;--okbg:#17352a;--badbg:#3d2224}}
+:root[data-theme="dark"]{--paper:#141a2b;--line:#27324f;--ink:#8fb0ff;--text:#e3e9f8;--muted:#9aa8c7;--margin:#ff7b72;--card:#1c2440;--ok:#5fd68f;--bad:#ff8a7d;--okbg:#17352a;--badbg:#3d2224}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--text);font:17px/1.55 Nunito,system-ui,sans-serif;
+background-image:repeating-linear-gradient(transparent 0 31px,var(--line) 31px 32px);background-attachment:local}
+main{max-width:640px;margin:0 auto;padding:20px 16px 48px 28px;position:relative;min-height:100vh}
+main::before{content:"";position:absolute;left:14px;top:0;bottom:0;width:2px;background:var(--margin);opacity:.55}
+h1{font:700 2.1rem/1.1 Caveat,cursive;color:var(--ink);margin:6px 0 14px}
+h2{font:700 1.5rem/1.2 Caveat,cursive;color:var(--ink);margin:26px 0 6px}
+nav{display:flex;gap:6px;margin-bottom:18px}
+nav button{flex:1;font:600 .95rem Nunito,sans-serif;padding:10px 6px;border:2px solid var(--ink);background:var(--card);color:var(--ink);border-radius:10px;cursor:pointer}
+nav button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+button:focus-visible{outline:3px solid var(--margin);outline-offset:2px}
+section[hidden]{display:none}
+ul{margin:4px 0 0;padding-left:20px}li{margin:2px 0}
+.note{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:2px 16px 12px;margin-bottom:12px}
+.q{font-style:italic;color:var(--muted)}
+/* cards */
+.stat{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;margin-bottom:8px}
+.fc{perspective:1000px;height:260px;margin-bottom:14px}
+.fc-in{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d;cursor:pointer}
+.fc.flip .fc-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:2px solid var(--ink);border-radius:14px;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;overflow:auto}
+.face.front{font:700 1.7rem/1.25 Caveat,cursive;color:var(--ink)}
+.face.back{transform:rotateY(180deg);font-size:1.05rem;border-style:dashed}
+.hint{text-align:center;color:var(--muted);font-size:.85rem;margin:-6px 0 12px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{flex:1;min-width:120px;font:700 1rem Nunito,sans-serif;padding:12px;border-radius:10px;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.btn.ok{border-color:var(--ok);color:var(--ok)}.btn.no{border-color:var(--bad);color:var(--bad)}
+.btn.main{background:var(--ink);color:var(--paper)}
+/* quiz */
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 16px}
+.bar i{display:block;height:100%;background:var(--ink);width:0;transition:width .3s}
+.qq{font:700 1.5rem/1.25 Caveat,cursive;color:var(--ink);margin:0 0 12px}
+.opt{display:block;width:100%;text-align:left;font:600 1rem/1.35 Nunito,sans-serif;padding:12px 14px;margin-bottom:8px;border:2px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;cursor:pointer}
+.opt.right{border-color:var(--ok);background:var(--okbg)}.opt.wrong{border-color:var(--bad);background:var(--badbg)}
+.opt:disabled{cursor:default;opacity:1}
+.fb{margin:10px 0;font-weight:700}
+.big{font:700 3rem/1 Caveat,cursive;color:var(--ink);text-align:center;margin:10px 0}
+.center{text-align:center}
+@media (prefers-reduced-motion:reduce){.fc-in,.bar i{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Reneszánsz, humanizmus, reformáció</h1>
+<nav role="tablist">
+<button role="tab" id="t-notes" aria-selected="true">Jegyzet</button>
+<button role="tab" id="t-cards" aria-selected="false">Kártyák</button>
+<button role="tab" id="t-quiz" aria-selected="false">Kvíz</button>
+</nav>
+
+<section id="notes"></section>
+
+<section id="cards" hidden>
+<div id="deck"></div>
+</section>
+
+<section id="quiz" hidden>
+<div id="quizbox"></div>
+</section>
+</main>
+
+<script>
+var NOTES=[
+["I. Reneszánsz – művelődéstörténeti korszak és korstílus",[
+"14–16. század","francia renaissance („újjászületés”)","Észak-Itália városaiból indult, majd elterjedt Európában","az antik görög–római eszmék újjászületése",
+"Világszemlélet: emberközpontúság; földi élet és egyéniség fontossága („Minden dolgok mértéke az ember”); sokoldalúan művelt személyiség ideálja (polihisztor)"]],
+["II. Reneszánsz művészet és irodalom",[
+"Művészet: harmónia, arányosság, szépség (Botticelli: Vénusz születése, Michelangelo: Ádám teremtése)","Irodalom: emberi érzések és kapcsolatok ábrázolása","Témák: szerelem, barátság, természet, emberi test","Új műfajok: egyéni hangú líra, tájköltészet, valóság ábrázolása"]],
+["III. Humanizmus – új gondolkodásmód",[
+"latin humanitas = „emberiesség”","világi gondolkodásmód, az evilági élet fontosságát hirdeti","Tudós magatartás: klasszikus műveltség","Az emberközpontú szemlélet elméleti alapja: polihisztor-eszmény"]],
+["IV. Reformáció – hitújító mozgalom",[
+"16. század","latin reformatio = „megújítás, újjászervezés”","Kettős jelleg: szellemi irányzat és vallási mozgalom","1517 – Luther Márton fellépése","Fontos alak: Kálvin János",
+"Követelmények: protestáns felekezetek; anyanyelvi Biblia és istentisztelet; iskolák és nyomdák alapítása","Első teljes magyar Bibliafordítás: Károli Gáspár (Vizsoly, 1590)","Katolikus fordítás: Káldi György (1626)"]],
+["V. Magyar vonatkozások",[
+"Mátyás király","Irodalom: Janus Pannonius (humanista költő), Balassi Bálint"]],
+["VI. Fontos fogalmak",[
+"Reneszánsz: művészeti és szellemi újjászületés","Humanizmus: emberközpontú világnézet, klasszikus műveltség","Reformáció: vallási és szellemi megújulás, hitújítás","Polihisztor: sokoldalúan művelt, több tudományban és művészetben járatos ember"]]
+];
+
+var CARDS=[
+["Mikor volt a reneszánsz?","14–16. század"],
+["Mit jelent a reneszánsz szó?","Újjászületés (francia renaissance)"],
+["Hol indult a reneszánsz?","Észak-Itália városaiból, majd elterjedt Európában"],
+["Minek az újjászületése a reneszánsz?","Az antik görög–római eszmék újjászületése"],
+["Mi a reneszánsz világszemlélete?","Emberközpontúság; a földi élet és az egyéniség fontossága; a sokoldalúan művelt személyiség ideálja"],
+["Melyik mondat jellemzi a reneszánsz embereszményt?","„Minden dolgok mértéke az ember”"],
+["Mit jelent a polihisztor?","Sokoldalúan művelt, több tudományban és művészetben járatos ember"],
+["Mi jellemzi a reneszánsz művészetet?","Harmónia, arányosság, szépség"],
+["Botticelli és Michelangelo híres művei?","Botticelli: Vénusz születése\nMichelangelo: Ádám teremtése"],
+["Mit ábrázol a reneszánsz irodalom?","Az emberi érzéseket és kapcsolatokat"],
+["Melyek a reneszánsz irodalom témái?","Szerelem, barátság, természet, emberi test"],
+["Milyen új műfajok jelentek meg?","Egyéni hangú líra, tájköltészet, a valóság ábrázolása"],
+["Mit jelent a humanizmus (humanitas)?","„Emberiesség” – világi gondolkodásmód, az evilági élet fontosságát hirdeti"],
+["Mi a humanista tudós magatartása?","Klasszikus műveltség"],
+["Mi az emberközpontú szemlélet elméleti alapja?","A polihisztor-eszmény"],
+["Mit jelent a reformáció?","Megújítás, újjászervezés (latin reformatio) – hitújító mozgalom, 16. század"],
+["Mi a reformáció kettős jellege?","Szellemi irányzat és vallási mozgalom"],
+["Mikor és ki lépett fel a reformáció elindításáért?","1517 – Luther Márton"],
+["Ki volt a reformáció másik fontos alakja?","Kálvin János"],
+["Melyek voltak a reformáció követelései?","Protestáns felekezetek; anyanyelvi Biblia és istentisztelet; iskolák és nyomdák alapítása"],
+["Ki fordította le az első teljes magyar Bibliát?","Károli Gáspár (Vizsoly, 1590)"],
+["Ki készítette a katolikus magyar fordítást?","Káldi György (1626)"],
+["Kik a magyar reneszánsz irodalom alakjai?","Janus Pannonius (humanista költő), Balassi Bálint; a korszak királya: Mátyás"]
+];
+
+var QUIZ=[
+["Mit jelent a „reneszánsz” szó?","Újjászületés",["Megújítás","Emberiesség","Felvilágosodás"]],
+["Hol indult a reneszánsz?","Észak-Itália városaiból",["Franciaország falvaiból","Spanyolországból","Németalföldről"]],
+["Melyik időszakra tehető a reneszánsz?","14–16. század",["10–12. század","12–14. század","17–19. század"]],
+["Minek az újjászületése a reneszánsz?","Az antik görög–római eszméké",["A középkori lovagi eszméké","A keleti kultúráké","A germán hagyományoké"]],
+["Melyik mondat fejezi ki a reneszánsz embereszményt?","„Minden dolgok mértéke az ember”",["„Mindent Isten dicsőségére”","„A cél szentesíti az eszközt”","„Gondolkodom, tehát vagyok”"]],
+["Mit jelent a polihisztor?","Sokoldalúan művelt ember",["Sok könyvet író költő","Vándorló tanító","Egyházi tisztségviselő"]],
+["Melyik Botticelli műve?","Vénusz születése",["Ádám teremtése","Az utolsó vacsora","A Sixtus-kápolna freskója"]],
+["Ki alkotta az Ádám teremtése című művet?","Michelangelo",["Botticelli","Janus Pannonius","Kálvin János"]],
+["Melyik reneszánsz irodalmi téma?","Szerelem, barátság, természet",["Lovagi párbajok","Szentek csodái","Világvége-jóslatok"]],
+["Melyik új műfaj a reneszánsz idején?","Egyéni hangú líra",["Szentek legendája","Középkori misztériumjáték","Krónika"]],
+["Mit jelent a latin humanitas szó?","Emberiesség",["Újjászületés","Megújítás","Műveltség"]],
+["Mit jelent a latin reformatio?","Megújítás, újjászervezés",["Újjászületés","Emberiesség","Hitvita"]],
+["Mi a reformáció kettős jellege?","Szellemi irányzat és vallási mozgalom",["Politikai és katonai mozgalom","Művészeti és tudományos irányzat","Gazdasági és jogi reform"]],
+["Melyik évben lépett fel Luther Márton?","1517",["1490","1526","1590"]],
+["Ki a reformáció másik fontos alakja Luther mellett?","Kálvin János",["Janus Pannonius","Balassi Bálint","Káldi György"]],
+["Melyik követelés tartozik a reformációhoz?","Anyanyelvi Biblia és istentisztelet",["Latin nyelvű istentisztelet kizárólagossága","A nyomdák betiltása","Az iskolák bezárása"]],
+["Ki fordította az első teljes magyar Bibliát?","Károli Gáspár",["Káldi György","Balassi Bálint","Janus Pannonius"]],
+["Hol és mikor jelent meg a Károli-Biblia?","Vizsoly, 1590",["Vizsoly, 1626","Buda, 1517","Pozsony, 1590"]],
+["Ki készítette a katolikus fordítást 1626-ban?","Káldi György",["Károli Gáspár","Luther Márton","Kálvin János"]],
+["Ki volt a magyar humanista költő Mátyás király korában?","Janus Pannonius",["Kálvin János","Káldi György","Károli Gáspár"]]
+];
+
+function $(id){return document.getElementById(id)}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\n/g,"<br>")}
+
+/* tabs */
+var tabs=["notes","cards","quiz"];
+function show(n){tabs.forEach(function(t){$(t).hidden=t!==n;$("t-"+t).setAttribute("aria-selected",t===n)});try{location.hash=n}catch(e){}}
+tabs.forEach(function(t){$("t-"+t).onclick=function(){show(t)}});
+
+/* notes */
+$("notes").innerHTML=NOTES.map(function(s){return '<h2>'+esc(s[0])+'</h2><div class="note"><ul>'+s[1].map(function(l){return '<li>'+esc(l)+'</li>'}).join("")+'</ul></div>'}).join("");
+
+/* flashcards */
+var queue,idx,known,flipped;
+function startDeck(list){queue=shuffle(list);idx=0;known=0;flipped=false;renderCard()}
+function renderCard(){
+  var d=$("deck");
+  if(idx>=queue.length){
+    var miss=queue.filter(function(c){return !c._k});
+    d.innerHTML='<div class="center"><div class="big">'+known+' / '+queue.length+'</div><p>'+(miss.length?'kártyát tudsz már. Ismételd át a többit!':'Minden kártyát tudsz. Szép munka!')+'</p></div><div class="row">'+(miss.length?'<button class="btn main" id="again">Ismétlés ('+miss.length+')</button>':'')+'<button class="btn" id="all">Összes újra</button></div>';
+    if(miss.length)$("again").onclick=function(){miss.forEach(function(c){delete c._k});startDeck(miss)};
+    $("all").onclick=function(){CARDS.forEach(function(c){delete c._k});startDeck(CARDS)};
+    return;
+  }
+  var c=queue[idx];
+  d.innerHTML='<div class="stat"><span>'+(idx+1)+' / '+queue.length+'</span><span>Tudom: '+known+'</span></div>'+
+  '<div class="fc'+(flipped?' flip':'')+'" id="fc"><div class="fc-in" id="fcin" role="button" tabindex="0" aria-label="Kártya megfordítása"><div class="face front">'+esc(c[0])+'</div><div class="face back">'+esc(c[1])+'</div></div></div>'+
+  '<p class="hint">Koppints a kártyára a megfordításhoz</p>'+
+  '<div class="row"><button class="btn no" id="no">Még nem tudom</button><button class="btn ok" id="yes">Tudom</button></div>';
+  var flip=function(){flipped=!flipped;$("fc").classList.toggle("flip",flipped)};
+  $("fcin").onclick=flip;
+  $("fcin").onkeydown=function(e){if(e.key===" "||e.key==="Enter"){e.preventDefault();flip()}};
+  $("yes").onclick=function(){c._k=true;known++;idx++;flipped=false;renderCard()};
+  $("no").onclick=function(){idx++;flipped=false;renderCard()};
+}
+CARDS.forEach(function(c){c._k=false});
+startDeck(CARDS);
+
+/* quiz */
+var qs,qi,score,answered;
+function startQuiz(){qs=shuffle(QUIZ);qi=0;score=0;renderQ()}
+function renderQ(){
+  var b=$("quizbox");
+  if(qi>=qs.length){
+    var p=Math.round(score/qs.length*100);
+    var msg=p>=90?"Kiváló! Mehet a dolgozat.":p>=70?"Jó eredmény, még néhány téma kell átismételni.":"Nézd át újra a jegyzetet és a kártyákat, aztán próbáld újra.";
+    b.innerHTML='<div class="center"><div class="big">'+score+' / '+qs.length+'</div><p>'+msg+'</p></div><div class="row"><button class="btn main" id="re">Új kvíz</button><button class="btn" id="tocards">Kártyák</button></div>';
+    $("re").onclick=startQuiz;$("tocards").onclick=function(){show("cards")};return;
+  }
+  var q=qs[qi],opts=shuffle([q[1]].concat(q[2]));answered=false;
+  b.innerHTML='<div class="stat"><span>'+(qi+1)+' / '+qs.length+'</span><span>Pont: '+score+'</span></div><div class="bar"><i style="width:'+(qi/qs.length*100)+'%"></i></div><p class="qq">'+esc(q[0])+'</p><div id="opts"></div><div class="fb" id="fb" aria-live="polite"></div><div id="nx"></div>';
+  opts.forEach(function(o){
+    var bt=document.createElement("button");bt.className="opt";bt.textContent=o;
+    bt.onclick=function(){
+      if(answered)return;answered=true;
+      var all=$("opts").children;
+      for(var i=0;i<all.length;i++){all[i].disabled=true;if(all[i].textContent===q[1])all[i].classList.add("right")}
+      if(o===q[1]){score++;$("fb").textContent="Helyes!";$("fb").style.color="var(--ok)"}
+      else{bt.classList.add("wrong");$("fb").textContent="Nem egészen. A jó válasz: "+q[1];$("fb").style.color="var(--bad)"}
+      $("nx").innerHTML='<button class="btn main" style="width:100%" id="next">'+(qi+1<qs.length?"Következő kérdés":"Eredmény")+'</button>';
+      $("next").onclick=function(){qi++;renderQ()};
+    };
+    $("opts").appendChild(bt);
+  });
+}
+startQuiz();
+
+try{var h=location.hash.replace("#","");if(tabs.indexOf(h)>-1)show(h)}catch(e){}
+</script>
+</body>
+</html>
